@@ -1,0 +1,59 @@
+﻿@model Team16LonghornBank.Models.PayBillsOnlineViewModel
+
+@{
+    ViewBag.Title = "PayBills";
+}
+
+@Html.ActionLink("Add Payee", "AddExistingPayee", "Payees", null, new { @class = "btn btn-primary" })
+
+<h2>Pay Bills Online</h2>
+
+@if (Model.Payees.Count == 0)
+{
+    <h4>You have no payees.</h4>
+}
+
+@if (Model.Payees.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Payment Amount
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Payees)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Edit", new { id = item.PayeeID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayeeType)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => Model.Transaction.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.EditorFor(modelItem => Model.Transaction.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(modelItem => Model.Transaction.TransactionDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+

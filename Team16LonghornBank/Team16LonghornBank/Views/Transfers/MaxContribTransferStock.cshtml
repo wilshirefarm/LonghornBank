@@ -1,0 +1,30 @@
+﻿@using Team16LonghornBank.Controllers
+
+@{
+    ViewBag.Title = "MaxContribTransferStock";
+}
+
+<h2>You are trying to transfer an amount that more than the total contribution amount. Choose an option from below.</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Auto, true)Automatically make the contribution valid</label>
+            <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Input)Input a new contribution amount</label>
+            <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Abandon)Abandon the contribution</label>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

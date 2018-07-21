@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "PurchaseStockConfirmation";
+}
+
+<h2>The stock purchase was successful.</h2>
+
+<div>
+    @Html.ActionLink("OK", "Details", "StockPortfolios", new { id = ViewBag.id }, new { @class = "btn btn-primary" })
+</div>

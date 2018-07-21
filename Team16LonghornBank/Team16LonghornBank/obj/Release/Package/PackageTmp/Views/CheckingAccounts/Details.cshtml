@@ -1,0 +1,162 @@
+﻿@using Team16LonghornBank.Controllers
+@model Team16LonghornBank.Models.CheckingAccountDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Checking Account</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckingAccount.AccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckingAccount.AccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckingAccount.AccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckingAccount.AccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckingAccount.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckingAccount.Balance)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+
+<h3>Search Transactions</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p class="form-group">
+        @Html.HiddenFor(model => model.CheckingAccountID)
+        Transaction Number: @Html.TextBox("TransactionNumber", null, new { @class = "form-control" }) <div class="text-danger">@ViewBag.TransactionNumberValidation</div>
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("TransactionNumberSort", SortBy.Ascending, true)Ascending</label>
+            <label class="radio">@Html.RadioButton("TransactionNumberSort", SortBy.Descending)Descending</label>
+        </div><br />
+        Date:
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("DateRange", "Last 15 days", true)Last 15 days</label>
+            <label class="radio">@Html.RadioButton("DateRange", "Last 30 days")Last 30 days</label>
+            <label class="radio">@Html.RadioButton("DateRange", "Last 60 days")Last 60 days</label>
+            <label class="radio">@Html.RadioButton("DateRange", "All")All</label>
+            <label class="radio">@Html.RadioButton("DateRange", "Custom")Custom</label>
+        </div>
+        Date From: @Html.EditorFor(model => model.DateFrom, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.DateFrom, "", new { @class = "text-danger" })
+        Date To: @Html.EditorFor(model => model.DateTo, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.DateTo, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("DateSort", SortBy.Ascending, true)Ascending</label>
+            <label class="radio">@Html.RadioButton("DateSort", SortBy.Descending)Descending</label>
+        </div><br />
+        Descrption: @Html.TextBox("Description", null, new { @class = "form-control" })
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("DescriptionSort", SortBy.Ascending, true)Ascending</label>
+            <label class="radio">@Html.RadioButton("DescriptionSort", SortBy.Descending)Descending</label>
+        </div><br />
+        Transaction Type: @Html.DropDownList("TransactionType", (SelectList)ViewBag.TransactionTypes, new { @class = "form-control" })
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("TransactionTypeSort", SortBy.Ascending, true)Ascending</label>
+            <label class="radio">@Html.RadioButton("TransactionTypeSort", SortBy.Descending)Descending</label>
+        </div><br />
+        Price range: 
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("PriceRange", "$0-$100", true)$0-$100</label>
+            <label class="radio">@Html.RadioButton("PriceRange", "$100-$200")$100-$200</label>
+            <label class="radio">@Html.RadioButton("PriceRange", "$200-$300")$200-$300</label>
+            <label class="radio">@Html.RadioButton("PriceRange", "$300+")$300+</label>
+            <label class="radio">@Html.RadioButton("PriceRange", "Custom")Custom</label>
+        </div>
+        From: @Html.TextBox("RangeFrom", null, new { @class = "form-control" }) <div class="text-danger">@ViewBag.Message</div>
+        To: @Html.TextBox("RangeTo", null, new { @class = "form-control" }) <div class="text-danger">@ViewBag.Message</div>
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("AmountSort", SortBy.Ascending, true)Ascending</label>
+            <label class="radio">@Html.RadioButton("AmountSort", SortBy.Descending)Descending</label>
+        </div><br />
+
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+
+<p>Displaying @ViewBag.Count records</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Transaction Number
+        </th>
+        <th>
+            Transaction Type
+        </th>
+        <th>
+            Transaction Date
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Pending?
+        </th>
+        <th>
+            Disputing?
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Transactions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isPending)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isBeingDisputed)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Transactions", new { id = item.TransactionID }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CheckingAccountID }) |
+    @Html.ActionLink("Back to List", "MyBankAccounts", "Account")
+</p>

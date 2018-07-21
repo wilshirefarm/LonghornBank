@@ -1,0 +1,56 @@
+﻿@model Team16LonghornBank.Models.Transaction
+
+@{
+    ViewBag.Title = "StockPortfolioToChecking";
+}
+
+<h2>StockPortfolioToChecking</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Which checking account would you like to make a transfer to?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Stock Portfolio</label>
+            <div class="col-md-10">
+                @Html.DropDownList("FromStockPortfolioID", (SelectList)ViewBag.FromStock, new { @class = "form-control" })
+            </div>
+            <label class="control-label col-md-2">Checking Accounts</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ToCheckingAccountID", (SelectList)ViewBag.ToCheckingAccounts, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Make transfer" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "ChooseAccountTypes", "Transfers", null, new { @class = "btn btn-default" })
+</div>

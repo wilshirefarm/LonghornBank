@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="MyDBConnection-Web.config Connection String" description="MyDBConnection Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:team16longhornbank.database.windows.net,1433;Initial Catalog=Team16LonghornBank;Persist Security Info=False;User ID=wilsh;Password=ilikePenguins1;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Toshiba15\\Desktop\\Spring\ 2017\\MIS\ 333K\\Projects\\Team16LonghornBank\\Team16LonghornBank\\Team16LonghornBank\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyDBConnection']/@connectionString" />
+  </parameter>
+</parameters>

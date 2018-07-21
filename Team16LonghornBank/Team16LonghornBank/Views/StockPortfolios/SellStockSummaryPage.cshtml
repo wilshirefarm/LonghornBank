@@ -1,0 +1,81 @@
+﻿@using Team16LonghornBank.Controllers
+@model Team16LonghornBank.Models.SellStockViewModel
+
+@{
+    ViewBag.Title = "SellStockSummaryPage";
+}
+
+<h2>Sell Stock Summary Page</h2>
+
+<div>
+    <h4>StockPurchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SellDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSharesToSell)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSharesToSell)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfSharesRemaining)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfSharesRemaining)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NetGainLoss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NetGainLoss)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="radio">@Html.RadioButton("decision", SellStockDecision.Confirm, true)Confirm the purchase</label>
+            <label class="radio">@Html.RadioButton("decision", SellStockDecision.Cancel)Cancel the purchase</label>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Done" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

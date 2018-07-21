@@ -1,0 +1,16 @@
+﻿@model Team16LonghornBank.Models.PayBillsOnlineViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>Your bill was not processed becauase you must enter both an amount and date for a bill payment!</h2>
+
+@if (Model.Transaction.CheckingAccountAffected != null)
+{
+    @Html.ActionLink("Try Again", "PayBillsOnlineChecking", "Payees", new { @class = "btn btn-default" })
+}
+@if (Model.Transaction.SavingsAccountAffected != null)
+{
+    @Html.ActionLink("Try Again", "PayBillsOnlineSavings", "Payees", new { @class = "btn btn-default" })
+}

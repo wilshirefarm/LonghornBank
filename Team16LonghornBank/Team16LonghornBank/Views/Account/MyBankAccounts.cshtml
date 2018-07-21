@@ -1,0 +1,224 @@
+﻿@model Team16LonghornBank.Models.AppUser
+@{
+    ViewBag.Title = "MyBankAccounts";
+}
+
+@Html.ActionLink("Create a banking account", "ApplyForBankingAccount", "Account", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Make a deposit", "Deposit", "Transactions", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Make a withdrawal", "Withdrawal", "Transactions", null, new { @class = "btn btn-info" })
+@Html.ActionLink("Make a transfer", "ChooseAccountTypes", "Transfers", null, new { @class = "btn btn-warning" })
+@Html.ActionLink("Pay Bills Online", "PayBillsOnlineChecking", "Payees", null, new { @class = "btn btn-default" })
+
+@if (!Model.IsActive)
+{
+    <h2>@Html.Label("Your account is inactive", new { @class = "text-danger" })</h2>
+}
+
+<h2>My Bank Accounts</h2>
+
+<h3>Checking Accounts</h3>
+@if (Model.CheckingAccounts.Count == 0)
+{
+    <h4>You have no checking accounts.</h4>
+}
+@if (Model.CheckingAccounts.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Account Number
+            </th>
+            <th>
+                Account Name
+            </th>
+            <th>
+                Balance
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item1 in Model.CheckingAccounts)
+        {
+            if (item1.Balance < 0)
+            {
+                <caption>You have (a) checking account(s) overdrawn.</caption>
+                break;
+            }
+        }
+
+        @foreach (var item in Model.CheckingAccounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FourDigitNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "CheckingAccounts", new { id = item.CheckingAccountID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Details", "Details", "CheckingAccounts", new { id = item.CheckingAccountID }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h3>Savings Accounts</h3>
+@if (Model.SavingsAccounts.Count == 0)
+{
+    <h4>You have no savings accounts.</h4>
+}
+@if (Model.SavingsAccounts.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Account Number
+            </th>
+            <th>
+                Account Name
+            </th>
+            <th>
+                Balance
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item2 in Model.SavingsAccounts)
+        {
+            if (item2.Balance < 0)
+            {
+                <caption>You have (a) savings account(s) overdrawn.</caption>
+                break;
+            }
+        }
+
+        @foreach (var item in Model.SavingsAccounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FourDigitNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "SavingsAccounts", new { id = item.SavingsAccountID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Details", "Details", "SavingsAccounts", new { id = item.SavingsAccountID }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<h3>IRAccount</h3>
+@if (Model.IRAccount == null)
+{
+    <h4>You do not have an IRAccount.</h4>
+}
+@if (Model.IRAccount != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Account Number
+            </th>
+            <th>
+                Account Name
+            </th>
+            <th>
+                Balance
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.IRAccount.Balance < 0)
+        {
+            <caption>This IRAccount is overdrawn.</caption>
+        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.IRAccount.FourDigitNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.IRAccount.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.IRAccount.Balance)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "IRAccounts", new { id = Model.IRAccount.IRAccountID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Details", "Details", "IRAccounts", new { id = Model.IRAccount.IRAccountID }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    </table>
+}
+
+<h3>Stock Portfolio</h3>
+@if (Model.StockPortfolio == null)
+{
+    <h4>You do not have a Stock Portfolio.</h4>
+}
+@if (Model.StockPortfolio != null)
+{
+    if (Model.StockPortfolio.isPending)
+    {
+        <h4>Your stock portfolio is pending.</h4>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Account Number
+                </th>
+                <th>
+                    Account Name
+                </th>
+                <th>
+                    Cash Value
+                </th>
+                <th>
+                    Stock Value
+                </th>
+                <th>
+                    Total Value
+                </th>
+                <th></th>
+            </tr>
+
+            @if (Model.StockPortfolio.CashValueBalance < 0)
+            {
+                <caption>This Stock Portfolio is overdrawn.</caption>
+            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.StockPortfolio.FourDigitNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.StockPortfolio.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.StockPortfolio.CashValueBalance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.StockPortfolio.StockPortionValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.StockPortfolio.TotalValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "StockPortfolios", new { id = Model.StockPortfolio.StockPortfolioID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Details", "Details", "StockPortfolios", new { id = Model.StockPortfolio.StockPortfolioID }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        </table>
+    }
+}

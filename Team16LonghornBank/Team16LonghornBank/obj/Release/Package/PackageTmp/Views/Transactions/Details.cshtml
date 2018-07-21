@@ -1,0 +1,144 @@
+﻿@model Team16LonghornBank.Models.TransactionsDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.TransactionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.TransactionID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.TransactionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.TransactionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.TransactionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.TransactionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.isPending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.isPending)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.isBeingDisputed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.isBeingDisputed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.EmployeeComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.EmployeeComments)
+        </dd>
+
+    </dl>
+</div>
+
+    @if (Model.Transaction.Dispute == null)
+    {
+        @Html.ActionLink("Make a dispute?", "Create", "Disputes", new { id = Model.TransactionID }, new { @class = "btn btn-warning" })
+    }
+
+    <p>
+        @if (Model.Transaction.CheckingAccountAffected != null)
+        {
+            @Html.ActionLink("Back", "Details", "CheckingAccounts", new { id = Model.Transaction.CheckingAccountAffected.CheckingAccountID }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Transaction.SavingsAccountAffected != null)
+        {
+            @Html.ActionLink("Back", "Details", "SavingsAccounts", new { id = Model.Transaction.SavingsAccountAffected.SavingsAccountID }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Transaction.IRAccountAffected != null)
+        {
+            @Html.ActionLink("Back", "Details", "IRAccounts", new { id = Model.Transaction.IRAccountAffected.IRAccountID }, new { @class = "btn btn-default" })
+        }
+        @if (Model.Transaction.StockPortfolioAffected != null)
+        {
+            @Html.ActionLink("Back", "Details", "StockPortfolios", new { id = Model.Transaction.StockPortfolioAffected.StockPortfolioID }, new { @class = "btn btn-default" })
+        }
+    </p>
+
+<h3>Similar Transactions</h3>
+<table class="table">
+    <tr>
+        <th>
+            Transaction Number
+        </th>
+        <th>
+            Transaction Type
+        </th>
+        <th>
+            Transaction Date
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Is Pending?
+        </th>
+        <th>
+            Disputed?
+        </th>
+        <th>
+            Employee Comments
+        </th>
+    </tr>
+    @foreach (var item in Model.FiveTransactions)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TransactionID)</td>
+            <td>@Html.DisplayFor(modelItem => item.TransactionType)</td>
+            <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.isPending)</td>
+            <td>@Html.DisplayFor(modelItem => item.isBeingDisputed)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmployeeComments)</td>
+        </tr>
+    }
+</table>

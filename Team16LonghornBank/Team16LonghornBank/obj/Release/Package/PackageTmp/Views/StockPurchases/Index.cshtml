@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Team16LonghornBank.Models.StockPurchase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InitialSharePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfShares)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalStockValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeInPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalChange)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InitialSharePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfShares)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalStockValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangeInPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalChange)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StockPurchaseID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StockPurchaseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StockPurchaseID })
+        </td>
+    </tr>
+}
+
+</table>

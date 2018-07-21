@@ -1,0 +1,54 @@
+﻿@using Team16LonghornBank.Controllers
+
+@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>Error</h2>
+<div class="alert alert-danger">
+    @switch (Model.Count())
+    {
+        case 0:
+            @: Something went wrong.  Please try again.
+            break;
+        case 1:
+            @Model.First();
+            break;
+        default:
+            @: The following errors were encountered:
+            <ul>
+                @foreach (string error in Model)
+                {
+                    <li>@error</li>
+                }
+            </ul>
+            break;
+    }
+</div>
+
+
+<div class="form-group">
+
+
+    <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Auto  , true)Automatically make the contribution valid</label>
+
+
+    <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Input)Input a new contribution amount</label>
+
+    <label class="radio">@Html.RadioButton("SelectedMaxOption", MaxOptions.Abandon)Abandom the contribution</label>
+
+
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Select Max Option" class="btn btn-info" />
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back", "Deposit", "Transactions", null, new { @class = "btn btn-default" })
+</div>
+

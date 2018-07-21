@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "ChooseAccounts";
+}
+
+<h2>Choose the type of accounts you would like to transfer between</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Which account type would you like to transfer money from?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Type of account to transfer money from</label>
+            <div class="col-md-10">
+                @Html.DropDownList("AccountFrom", (SelectList)ViewBag.AccountTypes, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <br /><br />
+        <h4>Which account type would you like to transfer money to?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Type of account to transfer money to</label>
+            <div class="col-md-10">
+                @Html.DropDownList("AccountTo", (SelectList)ViewBag.AccountTypes, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "MyBankAccounts", "Account", null, new { @class = "btn btn-default" })
+</div>

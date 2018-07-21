@@ -1,0 +1,65 @@
+﻿@model Team16LonghornBank.Models.Transaction
+
+@{
+    ViewBag.Title = "SavingsToSavings";
+}
+
+<h2>SavingsToSavings</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Which savings account would you like to make a transfer from?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Savings Accounts</label>
+            <div class="col-md-10">
+                @Html.DropDownList("FromSavingsAccountID", (SelectList)ViewBag.FromSavingsAccounts, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <br />
+
+        <h4>Which savings account would you like to make a transfer to?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Savings Accounts</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ToSavingsAccountID", (SelectList)ViewBag.ToSavingsAccounts, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <br />
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Make transfer" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "ChooseAccountTypes", "Transfers", null, new { @class = "btn btn-default" })
+</div>

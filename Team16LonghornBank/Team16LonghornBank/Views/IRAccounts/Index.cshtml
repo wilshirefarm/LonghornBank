@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Team16LonghornBank.Models.IRAccount>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxContribution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isQualified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxContribution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isQualified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IRAccountID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IRAccountID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IRAccountID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model Team16LonghornBank.Models.Dispute
+
+@{
+    ViewBag.Title = "AdjustDispute";
+}
+
+<h3>Adjust a Dispute</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Dispute Comments
+        </th>
+        <th>
+            Original Transaction Account
+        </th>
+        <th>
+            New Transaction Amount
+        </th>
+        <th>
+            Manager Comment
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.DisputeComments)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Transaction.Amount)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.CorrectAmount, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Transaction.EmployeeComments, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+    </tr>
+</table>
+
+@Html.ActionLink("Submit Adjustment", "AdjustDispute", "Disputes", new { id = Model.DisputeID }, new { @class = "btn btn-warning" })
+

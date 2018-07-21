@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Team16LonghornBank.Models.Dispute>
+
+@{
+    ViewBag.Title = "View Current Disputes";
+}
+
+<h2>View Current Disputes</h2>
+
+@Html.ActionLink("See Resolved Disputes", "SeeAll", "Disputes", new { @class = "btn btn-warning" })
+
+<table class="table">
+    <tr>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Customer Email
+        </th>
+        <th>
+            Transaction ID
+        </th>
+        <th>
+            Original Transaction Amount
+        </th>
+        <th>
+            Customer Desired Transaction Amount
+        </th>
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.Transaction.CheckingAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.CheckingAccountAffected.Customer.FirstName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.SavingsAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.SavingsAccountAffected.Customer.FirstName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.IRAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.IRAccountAffected.Customer.FirstName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.StockPortfolioAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.StockPortfolioAffected.Customer.FirstName, new { @class = "btn btn-default" })
+            }
+        </td>
+        <td>
+            @if (item.Transaction.CheckingAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.CheckingAccountAffected.Customer.LastName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.SavingsAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.SavingsAccountAffected.Customer.LastName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.IRAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.IRAccountAffected.Customer.LastName, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.StockPortfolioAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.StockPortfolioAffected.Customer.LastName, new { @class = "btn btn-default" })
+            }
+        </td>
+        <td>
+            @if (item.Transaction.CheckingAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.CheckingAccountAffected.Customer.Email, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.SavingsAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.SavingsAccountAffected.Customer.Id, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.IRAccountAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.IRAccountAffected.Customer.Id, new { @class = "btn btn-default" })
+            }
+            @if (item.Transaction.StockPortfolioAffected != null)
+            {
+                @Html.DisplayFor(modelItem => item.Transaction.StockPortfolioAffected.Customer.Id, new { @class = "btn btn-default" })
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction.TransactionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorrectAmount)
+        </td>
+        <td>
+            @if(item.CurrentStatus == "Submitted")
+            {
+                @Html.ActionLink("Resolve Dispute", "ResolveDispute", new { id = item.DisputeID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

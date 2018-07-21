@@ -1,0 +1,81 @@
+﻿@model Team16LonghornBank.Models.StockPurchase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock Purchase for @Html.DisplayFor(model => model.Stock.StockName)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialSharePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitialSharePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.CurrentPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock.CurrentPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock.Fee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock.Fee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfShares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfShares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalStockValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalStockValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeInPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeInPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalChange)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalChange)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "Details", "StockPortfolios", new { id = Model.StockPortfolio.StockPortfolioID }, new { @class = "btn btn-default" })
+</p>
